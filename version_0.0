@@ -1,0 +1,111 @@
+import os
+import random
+import colorama
+# set color to white upon startup
+print(colorama.Fore.WHITE)
+# demo text
+print("press enter to start demo", end=' ')
+#any time you see an input() like this, its so that the user can press enter and continue
+input()
+# creating player variables
+playerName = "Testplayer"
+playerHealth = 100
+playerDefence = 50
+playerActionPoints = 10
+# menuloop controls while statements
+menuLoop = 0
+
+# enemy class, max health is used to compare against current health and determine percentage
+class Enemy:
+	def __init__(self, name, health, maxHealth, defence, atk, spell1, spell2, spell3):
+		self.name = name
+		self.health = health
+		self.maxHealth = maxHealth
+		self.defence = defence
+		self.atk = atk
+		self.spell1 = spell1
+		self.spell2 = spell2
+		self.spell3 = spell3
+
+# class for body parts that will be shot.
+class Target:
+	def __init__(self, accuracy, damage, effect):
+		self.accuracy = accuracy
+		self.damage = damage
+		self.effect = effect
+
+
+#class for guns. makes accessing info about the gun easier
+class Gun:
+	def __init__(self, attack, ammo, accuracy, fireRate):
+		self.attack = attack
+		self.ammo = ammo
+		self.accuracy = accuracy
+		self.fireRate = fireRate
+
+# menu update is specifically for menus where the user enters an option. 4 possible options, if you want an option removed just add a blank string in its place.
+
+def menuUpdate(description, description2,  option1, option2, option3, option4):
+	os.system('cls' if os.name == 'nt' else 'clear')
+	print(description)
+	print(description2)
+	print("___________________________________________________________________________________\n")
+	print(option1, "     ", end=' ')
+	print(option2, "     ", end=' ')
+	print(option3, "     ", end=' ')
+	print(option4, "\n \n")
+	return input()
+
+def statcheck(stat):
+	os.system('cls' if os.name == 'nt' else 'clear')
+	print(stat.name, "'s stats: \n")
+	print("HEALTH = ", stat.health)
+	print("DEFENCE = ", stat.defence)
+	print("ATTACK = ", stat.atk)
+	input()
+
+#displays message on screen. clears screen beforehand
+def prompt(str):
+	os.system('cls' if os.name == 'nt' else 'clear')
+	print(str)
+	input()
+
+wizard1 = Enemy("testwizard", 100, 100, 20, 30, "fireball", "healing", "spirit's aid")
+
+pistol = Gun(10, 12, 70, 1)
+revolver = Gun(20, 6, 70, 1)
+assaultRifle = Gun(15, 30, 40, 3)
+shotgun = Gun(35, 2, 50, 1)
+playerOption = " "
+playerWeapon = " "
+menuLoop = 1
+while menuLoop == 1:
+	playerWeapon = menuUpdate("Pick your weapon.", "weapons have different stats. this choice is irreversible. type the number of your desired weapon.", "1. pistol", "2. revolver", "3. assault rifle", "4. shotgun")
+	if playerWeapon == "1" or playerWeapon == "2" or playerWeapon == "3" or playerWeapon == "4":
+		if playerWeapon == "1":
+			playerOption = str(menuUpdate("The" + colorama.Fore.LIGHTRED_EX + " pistol " + colorama.Fore.WHITE + "can hold 12 bullets, deals 10 dmg when shot, shoots once per turn, and has a 70% accuracy. do you want it?", "      ,_________\n     Y II_____==|\n     )  /J\n    /__/", "yes", " ", " ", "no"))
+			if playerOption == "yes":
+				playerWeapon = "pistol"
+				menuLoop = 2
+		elif playerWeapon == "2":
+			playerOption = str(menuUpdate("The" + colorama.Fore.LIGHTRED_EX + " revolver " + colorama.Fore.WHITE + "can hold 6 bullets, deals 20 dmg when shot, shoots once per turn, and has a 70% accuracy. do you want it?", "      __ _______,\n    _Y__]-------'\n   / _/J\n  |_|\n", "yes", " ", " ", "no"))
+			if playerOption == "yes":
+				playerWeapon = "revolver"
+				menuLoop = 2
+		elif playerWeapon == "3":
+			playerOption = str(menuUpdate("The" + colorama.Fore.LIGHTRED_EX + " assault rifle " + colorama.Fore.WHITE + "can hold 30 bullets, deals 15 dmg when shot, shoots thrice per turn, and has a 40% accuracy. do you want it?", "                 ___\n                [_-_]\n      _________,-'-'--_______/|\n     |       _     ___|_.......-------=\n     |__...'' / /J|  |\n             /_/   \\__\\", "yes", " ", " ", "no"))
+			if playerOption == "yes":
+				playerWeapon = "assaultRifle"
+				menuLoop = 2
+		elif playerWeapon == "4":
+			playerOption = str(menuUpdate("The" + colorama.Fore.LIGHTRED_EX + " shotgun " + colorama.Fore.WHITE + "can hold 2 rounds, deals 35 dmg when shot, shoots once per turn, and has a 50% accuracy. do you want it?", "                      _,______________________________,\n       _______..... Y.____|___|______________________|\n      |             _____.......------'\n      |        ..'''   J\n      |___...''\n", "yes", " ", " ", "no"))
+			if playerOption == "yes":
+				playerWeapon = "shotgun"
+				menuLoop = 2
+	else:
+		prompt("that was not a valid selection!")
+		menuLoop = 1
+
+# FIGHT TIME
+prompt("you have picked the " + playerWeapon + ".")
+prompt("The" + colorama.Fore.RED + " wizard " + colorama.Fore.WHITE + "approaches!")
