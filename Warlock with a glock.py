@@ -105,9 +105,10 @@ eagle = mixer.Sound("assets/eagle.mp3")
 type = mixer.Sound('assets/type.mp3')
 
 
+
 # creating player variables
 
-playerName = " "
+playerName = str()
 playerHealth = 100
 playerDefence = 50
 playerTempDefence = 0
@@ -116,7 +117,222 @@ playerMoney = 0
 playerHasArmour = False
 playerHasGlasses = False
 playerHasMap = False
+playerOutfit = 0
+playerOutfitsList = [
+	'''
 
+                                                                                
+                                                                                
+                                     :++~,,"                                    
+                                 /i          <i                                 
+                               ^               l                                
+                               t                ]                               
+                                                 _                              
+                              t                   ,                             
+                              ,                                                 
+                              .                                                 
+                               ^                 ^                              
+                               1                 x                              
+                                k_             xZ                               
+                                 n             +                                
+                                  >           0                                 
+                                  _           @                                 
+                                 '            ,                                 
+                                w               J                               
+                            +1                     ()'                          
+                     f{]'                               ^1)|                    
+                  (                                          .1                 
+                 }                                             0                
+                x                                               h               
+                _                                               t               
+                                                                +               
+                _                                               #               
+                -                                               #               
+                                                                <               
+                                                                <               
+                .                                               }               
+                -                                               #               
+                                                                ~               
+               W                                                 "              
+               @                                                 _              
+               _         f                             $         r              
+                        oi                              [        X              
+              -           ]                           Z !        'i             
+              ;        0  >                           .  t        f             
+             [        ;    ,                         l   ;         1            
+            ~`        r   _                           I   n        t            
+            -         `   j                           m   _         1           
+            ,        t   ,                                 <        m           
+           ~         _   ,                                 o        b           
+           d        X    f                             "             i           
+           b        !    -                             @    p        b          
+           b       a    <                                    l       i          
+           k      !     *                               _    ]       i          
+           -     l      +                               Y     f      i          
+                 _                                      I      0     0          
+          +     X      _                                 _      [    z          
+          t    c       t                                 ]      x    ;          
+          1    z      l                                   :           [         
+         {            }                                   0     #     t         
+         )      _     /                                   <            t        
+        r       t    .                 In                      _       _        
+        i    z; ,:   t                 } i                 <   -  0     i       
+        _   ' 1  +   t                 _ k                 <   ; O Y   ,        
+        -    }+      t                 ! {                 #      C    I        
+         _     ,     _                ;  ^                 #     I     -        
+          X   x      _                O   _                #      + '(          
+                     _                _   b                #                    
+                     _                    ^                #                    
+                     _               @     -               #                    
+                     _               l     t               #                    
+                     _              _       {              #                    
+                     _              |       ~              #                    
+                     _             )         z             *                    
+                     t            '          '             +                    
+                     1            f           +            ,                    
+                     .            c           #                                 
+                      /           [           O           ]                     
+                      /                                   _                     
+                      t          b             Q          _                     
+                      t                         I         _                     
+                      t         d               _         .                     
+                                <               l                               
+                     -         _                 x         <                    
+                     /         t                 ;         o                    
+                     +         (                 |         }                    
+                    <          >                 n          '                   
+                    b          ^                 ^          b                   
+                    _           i               {           b                   
+                    _           !               {           b                   
+                    b          :                 `          d                   
+                    k          -                 n          +                   
+                    i          {                 <                              
+                    ;         )                   i                             
+                     ,        _                   d        _                    
+                     _        ^                   >        *                    
+                     t       ]                     -       <                    
+                     .       O                     r                            
+                      /      _                     b      -                     
+                      /      _                     |      n                     
+                      -                            i      n                     
+                      ,                            !      `                     
+                      _      [                     h      x                     
+                      r      !                            J                     
+                      }      /                     k      +                     
+                     r       _                     b       Y                    
+                   x         +                     b         t                  
+                   X                               |         x                  
+                                                                                
+                                                                                
+                                                                                
+                                                                              ''',
+	'''                                                                                
+                                     l@@ai      I@@@@                           
+                                     w@@@@@@@d]a@@l                             
+                                    *@@@@@@@@@@@@_                              
+                                    $@@@@@-                                     
+                                   W@@@@@@@                                     
+                                  .@@@@@@@@@o                                   
+                                  @@@@@@@@@@@$                                  
+                                  /@@@@@@@@@@@Y                                 
+                                  c@@@@@@@@@@@@                                 
+                                 >@@@@@@@@@@@@@                                 
+                                *@@@@@@@@@@@@@@@                                
+                               Z@@@@@@@@@@@@@@@@@"                              
+                        ^@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@B                      
+                       W@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@$'                      
+                         x@@@@@@@@@@@@n|k@@@@@@@Ox   ;(I                        
+                           i|/tZ///i             J                              
+                               _                 J                              
+                               ]                 v                              
+                                l               >                               
+                                 x             z                                
+                                 ^{           p@$c                              
+                              m$@@#           @@@@@$                            
+                             m@@@@*           #@@@@@                            
+                              c@@@            -@@@W                             
+                            O@@@{               .@@@@,                          
+                     ^C@@@@@@@@@d               {@@@@@@@vl                      
+                   k@@@@@@@@@@@@@               O@@@@@@@@@@@@                   
+                  }@@@@@@@@@@@@@@p              O@@@@@@@@@@@@@w                 
+                 )@@@@@@@@@@@@@@@@>             M@@@@@@@@@@@@@@C                
+                 @@@@@@@@@@@@@@@@@b            "@@@@@@@@@@@@@@@@                
+                +@@@@@@@@@@@@@@@@@*            w@@@@@@@@@@@@@@@@c               
+                +@@@@@@@@@@@@@@@@@W            @@@@@@@@@@@@@@@@@b               
+                 @@@@@@@@@@@@@@@@@W           !@@@@@@@@@@@@@@@@@{               
+                 @@@@@@@@@@@@@@@@@W           n@@@@@@@@@@@@@@@@@                
+                 @@@@@@@@@@@@@@@@@W           0@@@@@@@@@@@@@@@@@                
+                 B@@@@@@@@@@@@@@@@W           k@@@@@@@@@@@@@@@@@                
+                 @@@@@@@@@@@@@@@@@M           c@@@@@@@@@@@@@@@@@.               
+                 @@@@@@@@@@@@@@@@@a           ^@@@@@@@@@@@@@@@@@r               
+                X@@@@@@@@@@@@@@@@@|            @@@@@@@@@@@@@@@@@/               
+                @@@@@@@@@@@@@@@@@@|            @@@@@@@@@@@@@@@@@k               
+               [@@@@@@@@@@@@@@@@@@k            @@@@@@@@@@@@@@@@@@/              
+               k@@@@@@@@@vJ@@@@@@@@^           @@@@@@@B@@@@@@@@@@*              
+              i@@@@@@@@@d @@@@@@@@@0          -@@@@@@@O-@@@@@@@@@$              
+              M@@@@@@@@@p @@@@@@@@@M          ]@@@@@@@O B@@@@@@@@@a             
+             d@@@@@@@@@@[n@@@@@@@@@J          ]@@@@@@@* O@@@@@@@@@@             
+            ^@@@@@@@@@@Q @@@@@@@@@@n          ]@@@@@@@@IJ@@@@@@@@@@@            
+            W@@@@@@@@@@  @@@@@@@@@@i          ]@@@@@@@@* @@@@@@@@@@@            
+           x@@@@@@@@@@O ^@@@@@@@@@@           ]@@@@@@@@@ 1@@@@@@@@@@r           
+           $@@@@@@@@@@| w@@@@@@@@@@           i@@@@@@@@@{ *@@@@@@@@@@           
+           @@@@@@@@@@@"{@@@@@@@@@@@           !@@@@@@@@@$  @@@@@@@@@@h          
+           @@@@@@@@@@B @@@@@@@@@@@@n          -@@@@@@@@@@  m@@@@@@@@@@_         
+          ^@@@@@@@@@@ k@@@@@@@@@@@@@          v@@@@@@@@@@)  @@@@@@@@@@@:        
+          @@@@@@@@@@vl@@@@@@@@@@@@@@          x@@@@@@@@@@$  #@@@@@@@@@@@        
+         f@@@@@@@@@@ r@@@@@@@@@@@@@@          J@@@@@@@@@@@@ /@@@@@@@@@@@$       
+         @@@@@@@@@@Y c@@@@@@@@@@@@@@          B@@@@@@@@@@@@@ M@@@@@@@@@@@$      
+        $@@@@@@@@@@k +@@@@@@@@@@@@@@>        -@@@@@@@@@@@@@@,*@@@@#cB@@@@m      
+      X@@@@@ >Z@@@@@ |@@@@@@@@@@@@@@n        [@@@@@@@@@@@@@@f@@@    t@B1        
+        m@@-     @@@ @@@@@@@@@@@@@@@z         @@@@@@@@@@@@@@*@@      l          
+          1      [l #@@@@@@@@@@@@@@@          Q@@@@@@@@@@@@@Y t      x          
+          -         @@@@@@@@@@@@@@@@   t@/    J@@@@@@@@@@@@@Y 1       +         
+              tr  d @@@@@@@@@@@@@@@t   C@Z    c@@@@@@@@@@@@@@l  }~    -         
+          i   t 1x .@@@@@@@@@@@@@@@    *@w    m@@@@@@@@@@@@@@ -~ {    :         
+          d     )  Q@@@@@@@@@@@@@@W    @@#    #@@@@@@@@@@@@@@   >    I          
+           c    /  @@@@@@@@@@@@@@@o   <@@@    h@@@@@@@@@@@@@@*  +   `           
+              l    @@@@@@@@@@@@@@@W   Z@@@p   f@@@@@@@@@@@@@@*   ;              
+                  k@@@@@@@@@@@@@@@W   @@@@M    O@@@@@@@@@@@@@@"                 
+                 ^@@@@@@@@@@@@@@@@@  r@@@@@>   ^@@@@@@@@@@@@@@@1                
+                 W@@@@@@@@@@@@@@@@@^ h@@@@@@   1@@@@@@@@@@@@@@@o                
+                d@@@@@@@@@@@@@@@@@@[ @@@@@@@   p@@@@@@@@@@@@@@@@)               
+               >@@@@@@@@@@@@@@@@@@@xa@@@@@@@@  I@@@@@@@@@@@@@@@@!               
+               X@@@@@@@@@@@@@@@@@@$,@@@@@@@@@   Z@@@@@@@@@@@@@@@/               
+               M@@@@@@@@@@@@@@@@@@$@@@@@@@@@@$  O@@@@@@@@@@@@@@@@,              
+               @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  m@@@@@@@@@@@@@@@@@              
+              ,@@@@@@@@@@@@@@@@@@@w@@@@@@@@@@@; @@@@@@@@@@@@@@@@@@$             
+              c@@@@@@@@@@@@@W/    m@@@@@@@@@@@*i@@#f((XooB@@@@@@@@@t            
+              @@@@@@@@@cI`        @@@@@@@@@@@@@          j@@@@@@@@@@            
+               /@@@@@@@{         v@@@@@@@@@@@@@t         ()   v@@dr             
+                       _         +             _         [                      
+                       ;        ,               }                               
+                      .         x               _                               
+                      t        i                 :        <                     
+                      _        _                 {        d                     
+                      `         '               :                               
+                     X          /               _          v                    
+                     c          _               t          @                    
+                     _          _               t          @                    
+                     n          f               +          @                    
+                     J          i               :          +                    
+                     l         -                 :                              
+                     ^         {                 |                              
+                      ,       .                           _                     
+                      ]       f                   c       b                     
+                      t       _                   1       !                     
+                      .       ,                   >                             
+                       _     ,                           _                      
+                       -     v                     -     Y                      
+                       1     J                     _     x                      
+                       -     Y                     -     :                      
+                       _      ,                   ]      Y                      
+                       +      !                   (      _                      
+                      .      :                                                  
+                     t       {                             n                    
+                    _        z                              d                   
+                      :tr___f                       zJJJzv:                     
+                                                                '''
+]
 # array used to store items the user has
 items = []
 
@@ -250,7 +466,6 @@ def spellMenu(description1, description2):
 	return input()
 
 
-
 #displays fancy message on screen. clears screen beforehand
 def prompt(str):
 	os.system('cls' if os.name == 'nt' else 'clear')
@@ -263,11 +478,10 @@ def prompt(str):
 	time.sleep(0.01)
 	print("\n")
 	promptContinue = input()
-	if promptContinue.lower() != "history":
-		return promptContinue
-	else:
+	if promptContinue.lower() == "history":
 		historyPrint()
 		input()
+		os.system('cls' if os.name == 'nt' else 'clear')
 		for word in str.split():
 			time.sleep(0.05)
 			print(f'{word:>1} ', end='')
@@ -276,6 +490,22 @@ def prompt(str):
 		print("\n")
 		promptContinue = input()
 		return(promptContinue)
+	elif promptContinue.lower() == "inventory":
+		os.system('cls' if os.name == 'nt' else 'clear')
+		print("What do you want to look at? \n")
+		print("Outfit          Items          Back")
+		playerOption = input()
+		if playerOption.lower() == "outfit":
+			os.system('cls' if os.name == 'nt' else 'clear')
+			print("You are wearing: ", end="")
+			if playerOutfit == 0:
+				print("Default outfit")
+			elif playerOutfit == 1:
+				print("Wizard outfit")
+			print(playerOutfitsList[playerOutfit])
+			input()
+	else:
+		return promptContinue
 
 
 
@@ -291,11 +521,10 @@ def promptSlow(str):
 	time.sleep(0.01)
 	print("\n")
 	promptContinue = input()
-	if promptContinue.lower() != "history":
-		return promptContinue
-	else:
+	if promptContinue.lower() == "history":
 		historyPrint()
 		input()
+		os.system('cls' if os.name == 'nt' else 'clear')
 		for word in str.split():
 			time.sleep(0.05)
 			print(f'{word:>1} ', end='')
@@ -304,6 +533,16 @@ def promptSlow(str):
 		print("\n")
 		promptContinue = input()
 		return(promptContinue)
+	elif promptContinue.lower() == "inventory":
+		os.system('cls' if os.name == 'nt' else 'clear')
+		print("What do you want to look at? \n")
+		print("Outfit          Items          Back")
+		playerOption = input()
+		if playerOption.lower() == "outfit":
+			os.system('cls' if os.name == 'nt' else 'clear')
+			print(playerOutfitsList[playerOutfit])
+			input()
+	
 
 
 def oldPrompt(str):
@@ -400,7 +639,7 @@ def fight(wizard1, menuLoopValue, message, music):
 
 
 				# if playerOption.lower() equals any valid option, the code beneath this will execute. otherwise the menu will just reprint itself and the player can choose again.
-				if playerOption.lower() == "fight" or playerOption.lower() == "spells" or playerOption.lower() == "extra" or playerOption.lower() == "run away" or playerOption == "kill yourself NOW":
+				if playerOption.lower() == "fight" or playerOption.lower() == "spells" or playerOption.lower() == "extra" or playerOption == "kill yourself NOW":
 					
 
 					# same deal as above except with areas the player can shoot. funny thing is, the player is told to type back to go back, but typing anything that isnt a body part works too.
@@ -910,6 +1149,7 @@ prompt("WELCOME TO WARLOCK WITH A GLOCK, BY FEDBEAN INTERACTIVE")
 
 prompt("YOUR JOURNEY IS ABOUT TO BEGIN.")
 playerName = prompt("BUT FIRST, WHAT IS YOUR NAME? TYPE IT BELOW.")
+playerName = playerName
 playerOption = prompt("IS " + playerName + " YOUR NAME? YES OR NO")
 while playerOption != "yes":
     playerName = prompt("REENTER YOUR NAME BELOW.")
@@ -922,7 +1162,7 @@ os.system('cls' if os.name == 'nt' else 'clear')
 npcName = (colorama.Fore.YELLOW + colorama.Back.BLUE + "Walmart Employee" + colorama.Fore.WHITE + colorama.Back.RESET)
 playerName = (colorama.Fore.LIGHTBLUE_EX + playerName + colorama.Fore.WHITE)
 
-'''
+
 prompt("You are a true " + colorama.Fore.BLUE + "A" + colorama.Fore.WHITE + "M" + colorama.Fore.RED + "E" + colorama.Fore.BLUE + "R" + colorama.Fore.WHITE + "I" + colorama.Fore.RED + "C" + colorama.Fore.BLUE + "A" + colorama.Fore.WHITE + "N"  + " patriot. Recently, whilst hunting for oil, your gun broke. This was devastating, but not to worry! Your local Walmart sells firearms.")
 prompt("You run as fast as you can to your gigantic pick-up truck, decorated with stickers of the American flag and a picture of a bald eagle laying a grenade like its an egg.")
 prompt("You can't waste a single second. After all, what will you do if 4 ruffians break into your home to steal your oil?")
@@ -936,7 +1176,7 @@ prompt(npcName + ": 'Welcome to Walmart, how can I help you today?'")
 prompt(playerName + ": 'Hey, do you know what aisle has guns?'")
 prompt(npcName + ": 'Certainly! come with me to aisle 27.'")
 prompt("The " + npcName + " leads you to aisle 27. There on the wall are dozens of guns lined up on display. You thank the " + npcName + " and begin browsing. After a while, you've narrowed down what you want to just 4 options.")
-'''
+
 playerOption = " "
 playerWeapon = " "
 while menuLoop == 1:
@@ -970,7 +1210,7 @@ while menuLoop == 1:
 		prompt("that was not a valid selection!")
 		menuLoop = 1
 
-fight(testenemy, 1, "Wizard approcahes", "assets/battle1.mp3")
+
 
 
 
@@ -997,7 +1237,7 @@ while menuLoop == 1:
 			playerOption = menuUpdate( "The practice dummy stands before you." + "\n \nyour ammo:" + str(weapon.ammo) + " / " + str(weapon.maxAmmo),
 									  "Your health: " + str(playerHealth) + "\nEnemy health: " + str(dummy.health) + "\n \nThis is a battle. During your turn in a battle, you get various options.\nFighting ends your turn and attacks your enemy.\nThe extra menu lets you use items and view information about your opponent. It does not use your turn up.\nRunning away gives you a chance to escape dangerous situations. If you fail when attempting to run away, the battle continues and you miss a turn. \nChoose your action:", "FIGHT",
 									  "EXTRA", "RUN AWAY", "")
-			if playerOption.lower() == "fight" or playerOption.lower() == "extra" or playerOption.lower() == "run away":
+			if playerOption.lower() == "fight" or playerOption.lower() == "extra":
 				if playerOption.lower() == "fight":
 					playerHit = menuUpdate("Where do you want to hit? \nDifferent areas have different chances to be hit, as well as dealing different amounts of damage.\nHitting the arms lowers you enemy's accuracy, and hitting their leg causes them to miss a turn. \n accuracy = " + str(weapon.accuracy) + "/ 100", "Type 'back' to go back.", "head", "torso", "legs",
 										   "arms")
@@ -1177,8 +1417,7 @@ while menuLoop == 1:
 						input()
 					if playerOption.lower() == "items":
 						prompt("You have no items!")
-				elif playerOption.lower() == "run away":
-					prompt("why are you running away from a practice dummy?")
+				
 	if missTurn == 0:
 		battleTurn = 2
 	else:
@@ -1194,6 +1433,9 @@ while menuLoop == 1:
 			playerDefence = playerTempDefence
 			prompt("the dummy stares at you.")
 			battleTurn = 1
+
+
+
 
 prompt(playerName + ": 'Hell yeah, this thing awesome!'")
 os.system('cls' if os.name == 'nt' else 'clear')
@@ -1241,8 +1483,9 @@ time.sleep(0.5)
 mixer.Sound.play(weapon.sound)
 time.sleep(1.5)
 prompt("Both wizards were shot in the head and died before they could finish their spell.")
-
-prompt(playerName + "'I wonder if these wands actually do anything...'")
+prompt(playerName + ": That was close... God bless the second amendment.")
+prompt("You walk over to the two wizard corpses.")
+prompt(playerName + ": I wonder if these wands actually do anything...")
 prompt("You walk over to one of the wizards and pick up his wand.")
 prompt("The second you pick up the wand, a strange feeling flows through your veins.")
 prompt("Your vision goes dark, And you fall over as the feeling grows stronger.")
@@ -1254,13 +1497,13 @@ mixer.music.play(-1)
 prompt('Out of nowhere, you hear someone speak to you. Their voice is deafeningly loud.')
 promptSlow(colorama.Fore.RED + "I WANT YOU." + colorama.Fore.WHITE)
 prompt(playerName + ": 'Huh?? Who's there?'")
-promptSlow(colorama.Fore.RED + "I WANT YOU TO GO FORTH AND SPREAD FREEDOM." + colorama.Fore.WHITE)
+prompt(colorama.Fore.RED + "I WANT YOU TO GO FORTH AND SPREAD FREEDOM." + colorama.Fore.WHITE)
 prompt(playerName + ": 'Seriously, who the hell are you?")
-promptSlow(colorama.Fore.RED + "IN TIME I WILL REVEAL MYSELF TO YOU." + colorama.Fore.WHITE)
-promptSlow(colorama.Fore.RED + "COMPLETE YOUR MISSION AND I WILL REWARD YOU." + colorama.Fore.WHITE)
+prompt(colorama.Fore.RED + "IN TIME I WILL REVEAL MYSELF TO YOU." + colorama.Fore.WHITE)
+prompt(colorama.Fore.RED + "COMPLETE YOUR MISSION AND I WILL REWARD YOU." + colorama.Fore.WHITE)
 prompt(playerName + ": No way, you don't even want to tell me your name, why should i help you?")
-promptSlow(colorama.Fore.RED + "YOU MUST." + colorama.Fore.WHITE)
-promptSlow(colorama.Fore.RED + "FOR YOUR COUNTRY." + colorama.Fore.WHITE)
+prompt(colorama.Fore.RED + "YOU MUST." + colorama.Fore.WHITE)
+prompt(colorama.Fore.RED + "FOR YOUR COUNTRY." + colorama.Fore.WHITE)
 
 menuLoop = 0
 voices = ["YOU MUST DO IT.", "YOU HAVE BEEN COMMANDED.", "YOUR COUNTRY NEEDS YOU.", "SPREAD FREEDOM ACROSS THIS LAND.", "YOU WILL DESTROY THEM ALL.", "YOU ARE DESTINED FOR GREATNESS.", "AMERICA WILL RISE.", "AMERICA WAS DESTINED TO RULE.", "YOU ARE DESTINED TO RULE.", "ALL WHO OPPOSE US WILL FALL.", "THIS TASK IS MORE IMPORTANT THEN YOU."]
@@ -1276,30 +1519,108 @@ while menuLoop < 100:
 
 
 prompt(playerName + ": 'ALRIGHT FINE I'LL DO IT!'")
+prompt(colorama.Fore.RED + "GOOD. DO THIS FOR ME AND I WILL GRANT YOU POWER." + colorama.Fore.WHITE)
+prompt(colorama.Fore.RED + "USE THIS WAND TO CAST SPELLS. I HAVE ENGRAVED THE TECHNIQUE INTO YOUR MIND." + colorama.Fore.WHITE)
+prompt(colorama.Fore.RED + "THERE IS SOMEBODY COMING. USE THIS NEW POWER TO ELIMINATE THEM." + colorama.Fore.WHITE)
 mixer.music.fadeout(5000)
 prompt("All of a sudden, the voices stop. your vision is normal, and you feel fine.")
 prompt(playerName + ": ...")
 prompt(playerName + ": What the hell was that???")
 prompt(playerName + ": What did that voice even want me to do?????")
-prompt("Shaken by that experience, you decide to search the room for anything useful. In a closet, you find some fancy wizard clothes.")
-prompt(playerName + ": Well... they may be a**holes but they have good taste in fashion.")
-prompt("You take the wizard clothes and put them on. Theyre quite comfortable!")
+prompt("Suddenly, you notice the faint sound of footsteps approaching.")
+
+prompt(playerName + ": Oh crap, That must be who the voice was talking about!")
+os.system('cls' if os.name == 'nt' else 'clear')
+time.sleep(2)
+
+prompt(enemyMessage("'Whats all the ruckus in here, I'm trying to brew a potion of enlargeme-'", "Wizard 3"))
+prompt(enemyMessage("'What the- What the hell have you done?? Who are you?'", "Wizard 3"))
+prompt(playerName + ": I-I killed them, and I'll kill you too if you don't leave!")
+prompt(enemyMessage("'Nonsense! I'm not leaving after what I just witnessed. You're going to die where you are standing.'", "Wizard 3"))
+
+wizard3 = Enemy("Wizard", 100, 100, 10, 15, 70, "fireball", "windgust", "spiritaid")
+fight(wizard3, 1, "The wizard approaches!", "assets/battle1.mp3")
+
+prompt(playerName + ": Phew... I hope hes the last one...")
+prompt(playerName + ": Lets see what he had on him...")
+prompt("You search through his pockets and find a map inside one of them.")
+os.system('cls' if os.name == 'nt' else 'clear')
+print(map)
+input()
+
+prompt("You decide to search the room for anything useful. In a closet, you find some fancy wizard clothes.")
+playerOption = input("Wear the wizard clothes? Yes or no")
+if playerOption.lower() == "yes":
+	prompt(playerName + ": Well... they may have tried to kill me, but they have good taste in fashion.")
+	playerOutfit = 1
+	prompt("You take the wizard clothes and put them on. Theyre quite comfortable!")
+else:
+	prompt("You decided not to wear the wizard clothes.")
+	playerOutfit = 0
 prompt(playerName + ": Those wizards mentioned something about a portal, I guess thats what I fell through.")
 prompt(playerName + ": If its a portal that brought me here, I'll probably need a portal to take me back.")
 prompt(playerName + ": Unfortunately, I don't know how to make one.")
 
 prompt(playerName + ": I should ask around and see if I can get one.")
-prompt("You go outside. You're greeted with bright scenery. Theres a lake next to the house you were in, and the water is glowing an unnatural shade of blue.")
-prompt("There's strange and odd plants you've never seen before, that are several meters tall, and are covered in flowers.")
-
+prompt("You walk outside and see that you're near a coast.")
 prompt("In the distance, you see a small collection of buildings by the ocean, it must be a village.")
-prompt("Hopefully someone there will have helpful information.")
-prompt("You walk over to the town.")
-introFinished = True
-menuLoop = 1
-while introFinished == True:
+playerOption = prompt("Do you want to visit the town? yes or no")
+if playerOption == "yes":
+	prompt("You began to make your way towards the town")
+	os.system('cls' if os.name == 'nt' else 'clear')
+	time.sleep(2)
+	prompt("On your way towards the town, you are approached by another wizard.")
+	prompt(enemyMessage("You, you there!", "Wizard"))
+	playerOption = prompt("It seems he is trying to get your attention. Do you talk to him? yes or no")
+	if playerOption.lower() == "yes":
+		prompt(enemyMessage("You there, come over here!", "Wizard"))
+		prompt("You cautiously walk towards the wizard, stopping about 3 metres away.")
+		prompt(playerName + ": hey, uh, can I help you with anything?")
+		if playerOutfit == 1:
+			prompt(enemyMessage("You, you're a wizard, correct?"))
+			prompt(playerName + ": uhhhhhhh, yeah, yeah I am a wizard, why do you ask?")
+		else:
+			prompt(enemyMessage("Traveller, I have a deal I wish to make with you."))
+		prompt(enemyMessage("My name is Galdon, and I enjoy challenging people to my games.", "Galdon"))
+		prompt(playerName + ": Games, huh? What kind of games?")
+		prompt(enemyMessage("A game of wits! All you need to do is answer my question, and if you're right, you win!", "Galdon"))
+		prompt(playerName + ": And what do I get for winning?")
+		prompt(enemyMessage("If you manage to beat my game, I shall reward you with 15 gold coins.", "Galdon"))
+		playerOption = prompt("Do you want to participate in Galdon's game? yes or no")
+		if playerOption.lower() == "yes":
+			prompt(playerName + ": alright then, I'll play.")
+			prompt(enemyMessage("Woohoo! Alright then, lets play. My question is:", "Galdon"))
+			prompt(enemyMessage("I bring light to the night, both bright and grand.", "Galdon"))
+			prompt(enemyMessage("My life is brief, but my beauty stands.", "Galdon"))
+			prompt(enemyMessage("In celebrations or quiet, I take my place.", "Galdon"))
+			prompt(enemyMessage("What am I, that brightens the darkest place?", "Galdon"))
+			os.system('cls' if os.name == 'nt' else 'clear')
+			print("Pick an answer: ")
+			print("Lantern \nCandle\n4th of July fireworks")
+			playerOption = input()
+			prompt(playerName + ": The answer is... {playerOption}!")
+			if playerOption.lower() == "candle":
+				prompt(enemyMessage("Yes, you got it right!", "Galdon"))
+				prompt(enemyMessage("Congratulations, Here's your prize!", "Galdon"))
+				prompt("Galdon gave you 15 gold coins.")
+				prompt(playerName + ": Wow, thanks!")
+				playerMoney += 15
+			if playerOption.lower() == "4th of july fireworks":
+				prompt(enemyMessage("What- no, what the hell even is that? its a candle you idiot!", "Galdon"))
+			else:
+				prompt(enemyMessage("Unfortunately, you got it wrong. Better luck next time.", "Galdon"))
+			prompt(enemyMessage("Well, thanks for playing with me! I'm going home now."))
+			prompt(playerName + ": Alright then, see you later I guess.")
+			prompt("Galdon walks back home.")
+			prompt("Speaking of walking, you still need to make your way over to that village.")
+		else:
+			prompt(playerName + ": No thanks, I'm good. I have things to sort out.")
+	os.system('cls' if os.name == 'nt' else 'clear')
+	time.sleep(2)
+	prompt("After a short walk you finally reach the town.")
+	menuLoop = 1
 	while menuLoop == 1:
-		prompt("Welcome to " + town.name)
+		prompt("Welcome to ")
 		os.system('cls' if os.name == 'nt' else 'clear')
 		print("What do you want to do?")
 		print("________________________")
@@ -1311,7 +1632,7 @@ while introFinished == True:
 				os.system('cls' if os.name == 'nt' else 'clear')
 				print("What building do you want to visit? \n Type 'back' to go back.")
 				print("________________________")
-				print("Town shop", "	", "Town center", "	", "House 1", "	", "House 2", "	", "House 3")
+				print("Shop", "	", "Town center", "	", "House 1", "	", "House 2", "	", "House 3")
 				playerOption = input()
 				if playerOption.lower == town.shop:
 					menuLoop = 3
