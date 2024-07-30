@@ -553,10 +553,6 @@ def fight(wizard1, message, music):
 				finisher = f"Finisher in: {timer}" if timer else "STARS AND STRIPES IS READY!"
 			else:
 				finisher = ""
-			if player.spellXP >= 100: #Levels up the player if they have enough XP
-				prompt("You leveled up in Spell Level!")
-				player.spellLevel += 1
-				player.spellXP -= 100
 			# Prints menu for player to choose their option.
 			#Includes key info, including Action Economy
 			playerOption = menuUpdate(f"{message}\n\n {finisher}\n Your Action Points: {player.actionPoints}\n Mana Cooldown: {player.mana}\n Your Ammo: {weapon.ammo} / {weapon.maxAmmo}\n Your Health: {player.health}", f" Enemy Health: {wizard1.health}\n\nChoose an action:", "FIGHT [2 AP]", "SPELLS [1 AP]", "ITEMS [1 AP]","INFO [0 AP]", "RELOAD [2 AP]", "SKIP")
@@ -649,7 +645,9 @@ def fight(wizard1, message, music):
 	player.spellXP += wizard1.xp
 	player.gold += wizard1.gold
 	prompt(f"YOU WON! + {wizard1.xp} XP + {wizard1.gold} GP")
-	if player.spellXP >= player.spellLevel * 50: #Rewards a Level up if XP is high enough
+	xpCheck = player.spellLevel * 50
+	if player.spellXP >= xpCheck: #Rewards a Level up if XP is high enough
+		player.spellXP -= xpCheck
 		player.spellLevel += 1
 		prompt(f"You have Levelled Up! Level: {player.spellLevel}")
 
