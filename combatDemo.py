@@ -603,11 +603,10 @@ def fight(wizard1, message, music):
 			wizard1.tempDefence = wizard1.defence #Resets enemy defence
 			if random.randint(1,8) <= 3: #3/8 chance to cast a spell
 				wizardMagicChance = random.randint(1,100)
-				if wizard1.health != wizard1.maxHealth: #Can't heal at max health
-					if wizardMagicChance * (wizard1.health / wizard1.maxHealth) <= 25:
-						if wizard1.supportSpell == "Spirit-Aid":
-							wizard1.health = min(wizard1.maxHealth, wizard1.health + 10)
-							prompt(f"{wizard1.name} casts Spirit-Aid! They recover 10 Health.")
+				if wizard1.health != wizard1.maxHealth and wizardMagicChance * (wizard1.health / wizard1.maxHealth) <= 25: #Can't heal at max health
+					if wizard1.supportSpell == "Spirit-Aid":
+						wizard1.health = min(wizard1.maxHealth, wizard1.health + 10)
+						prompt(f"{wizard1.name} casts Spirit-Aid! They recover 10 Health.")
 				elif wizardMagicChance >= 60:
 					hitChance = random.randint(1,100)
 					if hitChance >= (player.hitChance - player.tempDefence):
@@ -620,6 +619,8 @@ def fight(wizard1, message, music):
 							damageNumber = wizard1.tempAccuracy // 4 #Guaranteed to hit because that's the point of Magic Missiles
 							player.health -= damageNumber
 							prompt(f"{wizard1.name} casts Magic Missile! -{damageNumber} Health: {player.health} / {player.maxHealth}")
+					else:
+						prompt(f"You dodge {wizard1.name}'s Spell!")
 				else:
 					defenceSpell = wizard1.defenceSpell[random.randint(0,1)]
 					if defenceSpell == "Windgust":
