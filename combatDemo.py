@@ -183,12 +183,7 @@ def menuUpdate(description, description2,  option1="", option2="", option3="", o
 	print(description)
 	print(description2)
 	print("____________________________________________________________________________________________________________\n")
-	print(option1, "     ", end=' ')
-	print(option2, "     ", end=' ')
-	print(option3, "     ", end=' ')
-	print(option4, "     ", end=' ')
-	print(option5, "     ", end=' ')
-	print(option6, "\n\n")
+	print(f"{option1}     {option2}     {option3}     {option4}     {option5}     {option6}\n\n")
 	return input()
 
 #Defines Class for player's main weapon and its stats
