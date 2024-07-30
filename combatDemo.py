@@ -517,8 +517,7 @@ def fight(wizard1, message, music):
 		timer = 7
 	else:
 		timer = None
-	#changing the wizard's name to appear red.
-	wizard1.name = f"{colorama.Fore.LIGHTRED_EX}{wizard1.name}{colorama.Fore.WHITE}"
+	#Sets turn to player
 	battleTurn = 2
 	# plays cool battle music to kill wizards to
 	mixer.music.stop()
