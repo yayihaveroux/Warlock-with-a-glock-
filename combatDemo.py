@@ -609,7 +609,7 @@ def fight(wizard1, message, music):
 						prompt(f"{wizard1.name} casts Spirit-Aid! They recover 10 Health.")
 				elif wizardMagicChance >= 60:
 					hitChance = random.randint(1,100)
-					if hitChance >= (player.hitChance - player.tempDefence):
+					if hitChance <= (100 - player.tempDefence):
 						offenseSpell = wizard1.offenseSpell[random.randint(0,1)]
 						if offenseSpell == "Fireball":
 							damageNumber = max(10, random.randint(60, 75) - player.tempDefence) #Deals at least 10
